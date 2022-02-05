@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ch 7</string>
+    <string name="logo">Logo</string>
+    <string-array name="options">
+        <item>Drinks</item>
+        <item>Food</item>
+        <item>Stores</item>
+    </string-array>
+</resources>
