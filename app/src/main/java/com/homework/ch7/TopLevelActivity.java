@@ -24,7 +24,7 @@ public class TopLevelActivity extends Activity {
             }
         };
 
-        ListView listView = (ListView) findViewById(R.id.list_view);
+        ListView listView = (ListView) findViewById(R.id.top_list_view);
         listView.setOnItemClickListener(itemClickListener);
     }
 }

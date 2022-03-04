@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ch7">
         <activity
+            android:name=".DrinkDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DrinkCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".TopLevelActivity"
             android:exported="true">
             <intent-filter>
