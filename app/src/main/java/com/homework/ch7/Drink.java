@@ -29,7 +29,8 @@ public class Drink {
         return imageResourceID;
     }
 
+    @Override
     public String toString() {
-        return this.name;
+        return this.getName();
     }
 }
