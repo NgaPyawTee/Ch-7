@@ -2,7 +2,7 @@
     <string name="app_name">Ch 7</string>
     <string name="logo">Logo</string>
     <string-array name="options">
-        <item>Drinks</item>
+        <item>Games</item>
         <item>Food</item>
         <item>Stores</item>
     </string-array>

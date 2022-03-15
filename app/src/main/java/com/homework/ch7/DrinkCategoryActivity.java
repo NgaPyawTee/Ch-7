@@ -37,7 +37,7 @@ public class DrinkCategoryActivity extends Activity {
                     android.R.layout.simple_list_item_1,
                     cursor,
                     new String[]{"NAME"},
-                    new int[]{android.R.id.text1});
+                    new int[]{android.R.id.text1},0);
             listView.setAdapter(adapter);
 
         }catch (SQLiteException e){
