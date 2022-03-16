@@ -3,11 +3,11 @@ package com.homework.ch7;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -59,25 +59,48 @@ public class DrinkDetailActivity extends AppCompatActivity {
     }
 
     public void UpdateDatabase(View view) {
-        int drinkID = (int) getIntent().getExtras().get(EXTRA_ID);
+        int drinkID = (Integer) getIntent().getExtras().get(EXTRA_ID);
 
-        CheckBox checkBox = findViewById(R.id.checkbox);
-        ContentValues values = new ContentValues();
-        values.put("FAVORITE",checkBox.isChecked());
+        new UpdateAsynTask().execute(drinkID);
 
-        SQLiteOpenHelper helper = new Ch7DatabaseHelper(this);
+    }
 
-        try {
-            SQLiteDatabase db = helper.getWritableDatabase();
-            db.update("CH7",
-                    values,
-                    "_id=?",
-                    new String[]{Integer.toString(drinkID)}
-                    );
-            db.close();
-            Toast.makeText(this, "Database updated", Toast.LENGTH_SHORT).show();
-        }catch (SQLiteException e){
-            Toast.makeText(this, "Database unavaliable", Toast.LENGTH_SHORT).show();
+
+    private class UpdateAsynTask extends AsyncTask<Integer,Void,Boolean> {
+        private ContentValues values;
+
+        @Override
+        protected void onPreExecute() {
+            CheckBox checkBox = findViewById(R.id.checkbox);
+            values = new ContentValues();
+            values.put("FAVORITE",checkBox.isChecked());
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... integers) {
+            int id = integers[0];
+            SQLiteOpenHelper helper = new Ch7DatabaseHelper(DrinkDetailActivity.this);
+
+            try {
+                SQLiteDatabase db = helper.getWritableDatabase();
+                db.update("CH7",
+                        values,
+                        "_id=?",
+                        new String[]{Integer.toString(id)}
+                );
+                db.close();
+                return true;
+            }catch (SQLiteException e){
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (success){
+                Toast.makeText(DrinkDetailActivity.this, "Database updated", Toast.LENGTH_SHORT).show();
+            }else
+                Toast.makeText(DrinkDetailActivity.this, "Database unavaliable", Toast.LENGTH_SHORT).show();
         }
     }
 }
