@@ -59,10 +59,9 @@ public class DrinkDetailActivity extends AppCompatActivity {
     }
 
     public void UpdateDatabase(View view) {
-        int drinkID = (Integer) getIntent().getExtras().get(EXTRA_ID);
+        int drinkID = (int) getIntent().getExtras().get(EXTRA_ID);
 
         new UpdateAsynTask().execute(drinkID);
-
     }
 
 
